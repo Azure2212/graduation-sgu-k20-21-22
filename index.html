@@ -39,7 +39,8 @@
       box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
     }
 
-    .video-container iframe {
+    .video-container iframe,
+    .video-container video {
       position: absolute;
       top: 0;
       left: 0;
@@ -88,6 +89,8 @@
       allowfullscreen>
     </iframe>
 
+    <video id="localVideo" class="hidden" controls playsinline preload="metadata"></video>
+
     <div class="overlay" id="overlay">
       🎓 Video này sẽ được mở sau ngày <strong>01/08/2025</strong>. Vui lòng quay lại sau nhé!
     </div>
@@ -114,9 +117,11 @@
       overlay.innerHTML = '🎓 Video này sẽ được mở sau ngày&nbsp;<strong>01/03/2026</strong>. Vui lòng quay lại sau nhé!';
       releaseDate = new Date('2026-03-01T00:00:00');
     } else {
-      iframe.src = "https://www.youtube.com/embed/0PXLyGYPz1U";
-      overlay.innerHTML = '🎓 Video này sẽ được mở sau ngày&nbsp;<strong>01/03/2027</strong>. Vui lòng quay lại sau nhé!';
-      releaseDate = new Date('2027-03-01T00:00:00');
+      const video = document.getElementById('localVideo');
+      iframe.classList.add('hidden');
+      video.src = "foryou.mp4";
+      video.classList.remove('hidden');
+      releaseDate = new Date('2026-10-03T00:00:00');
     }
 
     const now = new Date();
